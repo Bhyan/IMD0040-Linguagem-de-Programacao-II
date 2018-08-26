@@ -1,6 +1,8 @@
 import java.awt.Color;
 import java.awt.Rectangle;
-import java.awt.Dimension;
+import java.util.Vector;
+import java.util.Iterator;
+import java.util.Random;
 
 /**
  * Class BallDemo - provides a demonstration of the
@@ -27,48 +29,70 @@ public class BallDemo
     }
  
     /**
-     * Simulate two bouncing balls
+     * Simulate n bouncing balls
+     * @param quantity_ amount of balls created
      */
-    public void bounce()
-    {
-        int ground = 400;   // position of the ground line
-        int xStart = 50;    // x-start of the ground line
-        int xLimit = 550;   // x-limit of the ground line
+    public void bounce(int quantity_){
+        if(quantity_ <= 0){
+            System.out.println("Input value.");
+            System.exit(1);
+        }
+        else{
+            Random rand = new Random();
+            int ground = 400;   // position of the ground line
+            int xLimit = myCanvas.getSize().width - 50;   // x-limit of the ground line
 
-        myCanvas.setVisible(true);
+            myCanvas.setVisible(true);
 
-        // draw the ground
-        myCanvas.setForegroundColor(Color.blue);
-        myCanvas.drawLine(xStart, ground, xLimit, ground);
+            // draw the ground
+            myCanvas.setForegroundColor(Color.blue);
+            myCanvas.drawLine(50, ground, xLimit, ground);
 
-        // crate and show the balls
-        BouncingBall ball = new BouncingBall(xStart, 50, 16, Color.blue, ground, myCanvas);
-        ball.draw();
-        BouncingBall ball2 = new BouncingBall(xStart + 20, 80, 20, Color.red, ground, myCanvas);
-        ball2.draw();
+            Vector<BouncingBall> balls = new Vector<BouncingBall>();
 
-        // Make them bounce until both have gone beyond the xLimit.
-        boolean finished =  false;
-        while(!finished) {
-            myCanvas.wait(50);           // small delay
-            ball.move();
-            ball2.move();
-            // stop once ball has travelled a certain distance on x axis
-            if(ball.getXPosition() >= xLimit && ball2.getXPosition() >= xLimit) {
-                finished = true;
+            Color[] color = {Color.black, Color.blue, Color.orange,
+                    Color.cyan, Color.gray, Color.green, Color.magenta,
+                    Color.pink, Color.red, Color.yellow};
+
+            // create balls with random size, position and colors
+            for(int i = 0; i < quantity_; i++){
+                int xStart = rand.nextInt(myCanvas.getSize().width);
+                int yStart = rand.nextInt(myCanvas.getSize().height / 4);
+                int size = rand.nextInt(20) + 16;
+                int ballColor = rand.nextInt(10);
+
+                BouncingBall ball = new BouncingBall(xStart, yStart, size, color[ballColor], 
+                        ground, myCanvas);
+                ball.draw();
+                balls.add(ball);
+            }
+
+            // Make them bounce until both have gone beyond the xLimit.
+            while(!balls.isEmpty()){
+                for(int i = 0; i < balls.size(); i ++){
+                    myCanvas.wait(25);
+                    balls.get(i).move();
+
+                    if(balls.get(i).getXPosition() >= xLimit){
+                        balls.get(i).erase();
+                        balls.remove(i);
+                    }
+                }
             }
         }
-        ball.erase();
-        ball2.erase();
     }
     
-    public void drawFrame(){
+    /**
+     * Draw rectangle on canvas
+     * @param width_ width of canvas
+     * @param height_ height of canvas
+     */
+    public void drawFrame(int width_, int height_){
+        myCanvas = new Canvas("Ball Demo", width_, height_);
+
         myCanvas.setVisible(true);
         myCanvas.setForegroundColor(Color.blue);
 
-        Dimension dim = new Dimension(WIDTH, HEIGHT);
-
-        Rectangle rect = new Rectangle(0, 0, 500, 500);
-        myCanvas.fill(rect);
+        myCanvas.fillRectangle(20 , 20, width_ - 40, height_ - 40);
     }
 }
