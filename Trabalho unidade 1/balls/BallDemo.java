@@ -1,7 +1,7 @@
 import java.awt.Color;
 import java.awt.Rectangle;
+import java.awt.Dimension;
 import java.util.Vector;
-import java.util.Iterator;
 import java.util.Random;
 
 /**
@@ -34,17 +34,22 @@ public class BallDemo
      */
     public void bounce(int quantity_){
         if(quantity_ <= 0){
-            System.out.println("Input value.");
+            System.out.println("Input invalid.");
             System.exit(1);
         }
         else{
             Random rand = new Random();
-            int ground = 400;   // position of the ground line
-            int xLimit = myCanvas.getSize().width - 50;   // x-limit of the ground line
+            Dimension dim = myCanvas.getSize();
 
             myCanvas.setVisible(true);
 
+            // position of the floor line at 99% of the canvas size
+            int ground = (int)(dim.height * 0.99);
+            // x-limit of the ground line
+            int xLimit = dim.width - 50;
+
             // draw the ground
+            myCanvas.erase();
             myCanvas.setForegroundColor(Color.blue);
             myCanvas.drawLine(50, ground, xLimit, ground);
 
@@ -56,8 +61,8 @@ public class BallDemo
 
             // create balls with random size, position and colors
             for(int i = 0; i < quantity_; i++){
-                int xStart = rand.nextInt(myCanvas.getSize().width);
-                int yStart = rand.nextInt(myCanvas.getSize().height / 4);
+                int xStart = rand.nextInt(dim.width);
+                int yStart = rand.nextInt(dim.height / 4);
                 int size = rand.nextInt(20) + 16;
                 int ballColor = rand.nextInt(10);
 
@@ -67,7 +72,7 @@ public class BallDemo
                 balls.add(ball);
             }
 
-            // Make them bounce until both have gone beyond the xLimit.
+            // make them bounce until both have gone beyond the xLimit.
             while(!balls.isEmpty()){
                 for(int i = 0; i < balls.size(); i ++){
                     myCanvas.wait(25);
@@ -84,15 +89,20 @@ public class BallDemo
     
     /**
      * Draw rectangle on canvas
-     * @param width_ width of canvas
-     * @param height_ height of canvas
      */
-    public void drawFrame(int width_, int height_){
-        myCanvas = new Canvas("Ball Demo", width_, height_);
+    public void drawFrame(){
+        Dimension dim = myCanvas.getSize();
 
         myCanvas.setVisible(true);
         myCanvas.setForegroundColor(Color.blue);
 
-        myCanvas.fillRectangle(20 , 20, width_ - 40, height_ - 40);
+        Rectangle rec = new Rectangle(20 , 20, dim.width - 40, dim.height - 40);
+
+        myCanvas.erase();
+
+        rec.setLocation(20, 20);
+        myCanvas.draw(rec);
+
+        myCanvas.fill(rec);
     }
 }
