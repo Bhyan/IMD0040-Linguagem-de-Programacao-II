@@ -10,7 +10,7 @@ public class Professor{
     private int m_idade;
 
     /**
-     * Construtor do objeto professor.
+     * Construtor da classe professor.
      * @param nome_ o nome do professor.
      * @param matricula_ o número da matricula do professor.
      * @param idade_ idade do professor.

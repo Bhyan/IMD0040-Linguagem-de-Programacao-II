@@ -8,7 +8,7 @@ public class ProfessorRegime extends Professor{
     private double m_salario;
 
     /**
-     * Construtor do objeto ProfessorRegime.
+     * Construtor da classe ProfessorRegime.
      * @param nome_ o nome do professor.
      * @param matricula_ o número da matricula do professor.
      * @param idade_ idade do professor.
