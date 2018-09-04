@@ -1,5 +1,5 @@
 /**
- * Classe pai Produto
+ * Classe Produto.
  *
  * @author Bryan Brito
  * @version 2018.09.03
@@ -96,7 +96,7 @@ public class Produto{
      * Retorna a data de fabricação do produto.
      * @return m_data_fabricacao
      */
-    public String getData(){
+    public String getDataFabricacao(){
         return m_data_fabricacao;
     }
 
@@ -104,7 +104,7 @@ public class Produto{
      * Altera a data de fabricação do produto.
      * @param data_fabricacao_ nova data de fabricação.
      */
-    public void setData(String data_fabricacao_){
+    public void setDataFabricacao(String data_fabricacao_){
         m_data_fabricacao = data_fabricacao_;
     }
 }

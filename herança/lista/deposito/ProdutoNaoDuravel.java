@@ -1,5 +1,5 @@
 /**
- * Classe pai ProdutoNaoDuravel.
+ * Classe ProdutoNaoDuravel.
  *
  * @author Bryan Brito
  * @version 2018.09.03
