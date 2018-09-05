@@ -49,6 +49,10 @@ public class Vehicle{
         return location;
     }
 
+    /**
+     * Set the location of the vehicle.
+     * @param location The location of the vehicle.
+     */
     public void setLocation(String location){
         this.location = location;
     }
@@ -60,6 +64,6 @@ public class Vehicle{
     public String getStatus()
     {
         return id + " at " + location + " headed for " +
-               destination;
+                destination;
     }
 }
