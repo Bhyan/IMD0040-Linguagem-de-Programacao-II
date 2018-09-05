@@ -6,14 +6,7 @@
  * @author David J. Barnes 
  * @version 2010.12.03
  */
-public class Taxi
-{
-    // A unique ID for this taxi.
-    private String id;
-    // The destination of this taxi.
-    private String destination;
-    // The location of this taxi.
-    private String location;
+public class Taxi extends Vehicle{
     // Whether it is free or not.
     private boolean free;
 
@@ -24,9 +17,8 @@ public class Taxi
      */
     public Taxi(String base, String id)
     {
-        this.id = id;
-        location = base;
-        destination = null;
+        super(id);
+        super.setLocation(base);
         free = true;
     }
     
@@ -37,7 +29,7 @@ public class Taxi
      */
     public void book(String destination)
     {
-        setDestination(destination);
+        super.setDestination(destination);
         free = false;
     }
 
@@ -47,8 +39,8 @@ public class Taxi
      */
     public String getStatus()
     {
-        return id + " at " + location + " headed for " +
-               destination;
+        return super.getID() + " at " + super.getLocation() + " headed for " +
+               super.getDestination();
     }
     
     /**
@@ -57,7 +49,7 @@ public class Taxi
      */
     public String getID()
     {
-        return id;
+        return super.getID();
     }
     
     /**
@@ -66,7 +58,7 @@ public class Taxi
      */
     public String getLocation()
     {
-        return location;
+        return super.getLocation();
     }
     
     /**
@@ -75,16 +67,7 @@ public class Taxi
      */
     public String getDestination()
     {
-        return destination;
-    }
-    
-    /**
-     * Set the intented destination of the taxi.
-     * @param destination The intended destination.
-     */
-    public void setDestination(String destination)
-    {
-        this.destination = destination;
+        return super.getDestination();
     }
     
     /**
@@ -93,8 +76,8 @@ public class Taxi
      */
     public void arrived()
     {
-        location = destination;
-        destination = null;
+        super.setLocation(super.getDestination());
+        super.setDestination(null);
         free = true;
     }
 }

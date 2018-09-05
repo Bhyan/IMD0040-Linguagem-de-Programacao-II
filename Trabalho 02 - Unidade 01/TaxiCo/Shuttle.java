@@ -8,15 +8,7 @@ import java.util.*;
  * @author David J. Barnes 
  * @version 2010.12.03
  */
-public class Shuttle
-{
-    // A unique ID for this shuttle.
-    private String id;
-    // The next destination of this shuttle on its
-    // circular route.
-    private String destination;
-    // The location of this shuttle.
-    private String location;
+public class Shuttle extends Vehicle{
     // The circular route of this shuttle.
     private ArrayList<String> route;
     // The destination number in route that the shuttle is
@@ -31,7 +23,7 @@ public class Shuttle
      */
     public Shuttle(String id, ArrayList<String> route)
     {
-        this.id = id;
+        super(id);
         setRoute(route);
     }
     
@@ -41,8 +33,8 @@ public class Shuttle
      */
     public String getStatus()
     {
-        return id + " at " + location + " headed for " +
-               destination;
+        return super.getID() + " at " + super.getLocation() + " headed for " +
+               super.getDestination();
     }
     
     /**
@@ -51,16 +43,7 @@ public class Shuttle
      */
     public String getID()
     {
-        return id;
-    }
-    
-    /**
-     * Return the location of the shuttle.
-     * @return The location of the shuttle.
-     */
-    public String getLocation()
-    {
-        return location;
+        return super.getID();
     }
     
     /**
@@ -69,7 +52,7 @@ public class Shuttle
      */
     public String getDestination()
     {
-        return destination;
+        return super.getDestination();
     }
     
     /**
@@ -77,7 +60,7 @@ public class Shuttle
      */
     public void arrived()
     {
-        location = destination;
+        super.setLocation(getDestination());
         setNextDestination();
     }
     
@@ -92,18 +75,9 @@ public class Shuttle
             // Start from the beginning again.
             destinationNumber = 0;
         }
-        setDestination(route.get(destinationNumber));
+        super.setDestination(route.get(destinationNumber));
     }
-
-    /**
-     * Set the intented destination of the suttle.
-     * @param destination The intended destination.
-     */
-    private void setDestination(String destination)
-    {
-        this.destination = destination;
-    }
-    
+   
     /**
      * Set the route for this shuttle.
      * @param route The circular list of destinations.
@@ -114,7 +88,7 @@ public class Shuttle
         this.route = new ArrayList<String>();
         this.route.addAll(route);
         destinationNumber = 0;
-        location = route.get(destinationNumber);
+        super.setLocation(route.get(destinationNumber));
         setNextDestination();
     }
 

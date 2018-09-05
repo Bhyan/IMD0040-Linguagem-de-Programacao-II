@@ -2,8 +2,8 @@
  * The test class Helper.
  * Provides the beginning of a set of tests for program development.
  *
- * @author  (your name)
- * @version (a version number or a date)
+ * @author  Bryan Brito
+ * @version 05.09.2018
  */
 public class Helper 
 {
@@ -35,7 +35,7 @@ public class Helper
 	public void testBook()
 	{
 		setUp();
-		Taxi taxi1 = (Taxi) taxiCo1.lookup("Car #1");		
+		Taxi taxi1 = (Taxi)taxiCo1.lookup("Car #1");		
 		taxi1.book("HIPER");
 		if ("HIPER".equalsIgnoreCase(taxi1.getDestination()) ) {
 			System.out.println("Funcionou");
@@ -49,7 +49,7 @@ public class Helper
 	 */
 	public void testArrived()
 	{
-		Taxi taxi1 = (Taxi) taxiCo1.lookup("Car #1");
+		Taxi taxi1 = (Taxi)taxiCo1.lookup("Car #1");
 		taxi1.book("HIPER");
 		taxi1.arrived();
 		if ( taxi1.getDestination() == null && "HIPER".equalsIgnoreCase(taxi1.getLocation()) ) {
@@ -68,5 +68,3 @@ public class Helper
 		helper.testArrived();
 	}
 }
-
-
