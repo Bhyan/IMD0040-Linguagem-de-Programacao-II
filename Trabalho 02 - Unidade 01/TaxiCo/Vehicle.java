@@ -1,3 +1,8 @@
+/**
+ *
+ * @author Bryan Brito
+ * @version 06.09.2018
+ */
 public class Vehicle{
     // A unique ID for this vehicle.
     private String id;
@@ -63,7 +68,11 @@ public class Vehicle{
      */
     public String getStatus()
     {
-        return id + " at " + location + " headed for " +
-                destination;
+        if(destination == null){
+            return id + " at " + location + " with no destination at this time.";
+        }
+        else{
+            return id + " at " + location + " headed for " + destination;
+        }
     }
 }

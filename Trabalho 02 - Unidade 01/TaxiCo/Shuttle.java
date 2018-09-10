@@ -91,5 +91,4 @@ public class Shuttle extends Vehicle{
         super.setLocation(route.get(destinationNumber));
         setNextDestination();
     }
-
 }
