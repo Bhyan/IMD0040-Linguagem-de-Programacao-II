@@ -12,15 +12,15 @@ public class Principal {
 		
 		SeguroVida seguro = new SeguroVida(1, "Maria", 150.0, 30.0);
 		ContaCorrente cc = new ContaCorrente("1020-5", "100.231-1", 150.0);
-		Pessoa joao = new Pessoa("Roberto", 500.0, cc, seguro);
-		
-		pessoa.cadastraPessoa(joao);
+		Pessoa roberto = new Pessoa("Roberto", 500.0, cc, seguro);
+				
+		pessoa.cadastraPessoa(roberto);
 
 		seguro = new SeguroVida(1, "João", 150.0, 30.0);
 		cc = new ContaCorrente("2105-4", "123.564-9", 300.0);
-		Pessoa maria = new Pessoa("Madona", 1000.0, cc, seguro);
+		Pessoa madona = new Pessoa("Madona", 1000.0, cc, seguro);
 		
-		pessoa.cadastraPessoa(maria);
+		pessoa.cadastraPessoa(madona);
 		
 		seguro = new SeguroVida(1, "Maria", 150.0, 30.0);
 		cc = new ContaCorrente("1023-5", "100.233-1", 200.0);

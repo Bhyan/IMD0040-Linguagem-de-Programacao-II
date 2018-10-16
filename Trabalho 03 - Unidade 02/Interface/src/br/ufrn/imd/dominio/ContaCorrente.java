@@ -35,14 +35,16 @@ public class ContaCorrente implements Tributavel{
 	 * @param valor
 	 */
 	public void sacar(double valor) {
-		if(valor > 0 && saldo >= valor ) {
-			saldo -= valor;
+		try {
+			if(valor > 0 && saldo >= valor ) {
+				saldo -= valor;
+			}
+			
+			else if(valor <= 0) throw new ListaErro("Saldo insuficiente.");
+			else if(valor > saldo) throw new  ListaErro("Valor menor ou igual a zero.");
 		}
-		else if(valor <= 0) {
-			System.out.println("Valor menor ou igual a zero.");
-		}
-		else if(valor > saldo) {
-			System.out.println("Valor de saque maior que saldo.");
+		catch(ListaErro erro) {
+			System.out.println(erro.getMsg());
 		}
 	}
 	
@@ -51,11 +53,14 @@ public class ContaCorrente implements Tributavel{
 	 * @param valor
 	 */
 	public void depositar(double valor) {
-		if(valor > 0) {
-			saldo += valor;
+		try {
+			if(valor > 0) {
+				saldo += valor;
+			}
+			else throw new ListaErro("Valor menor ou igual a zero.");
 		}
-		else {
-			System.out.println("Valor menor ou igual a zero.");
+		catch(ListaErro erro) {
+			System.out.println(erro.getMsg());
 		}
 	}
 	
@@ -65,13 +70,16 @@ public class ContaCorrente implements Tributavel{
 	 * @param cc
 	 */
 	public boolean transferencia(double valor, ContaCorrente cc) {
-		if(saldo >= valor) {
-			sacar(valor);
-			cc.depositar(valor);
-			return true;
+		try {
+			if(saldo >= valor) {
+				sacar(valor);
+				cc.depositar(valor);
+				return true;
+			}
+			else throw new ListaErro("Saldo insuficiente.");
 		}
-		else {
-			System.out.println("Saldo insuficiente.");
+		catch(ListaErro erro) {
+			System.out.println(erro.getMsg());
 			return false;
 		}
 	}
